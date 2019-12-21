@@ -200,23 +200,24 @@ defmodule Phoenix.CodeReloader.Server do
   end
 
   defp mix_compile_unless_stale_config(compilers) do
-    manifests = Mix.Tasks.Compile.Elixir.manifests()
-    configs = Mix.Project.config_files()
+    #manifests = Mix.Tasks.Compile.Elixir.manifests()
+    #configs = Mix.Project.config_files()
+    mix_compile(compilers)
 
-    case Mix.Utils.extract_stale(configs, manifests) do
-      [] ->
-        mix_compile(compilers)
+    #case Mix.Utils.extract_stale(configs, manifests) do
+      #[] ->
+        #mix_compile(compilers)
 
-      files ->
-        raise """
-        could not compile application: #{Mix.Project.config()[:app]}.
+      #files ->
+        #raise """
+        #could not compile application: #{Mix.Project.config()[:app]}.
 
-        You must restart your server after changing the following config or lib files:
+        #You must restart your server after changing the following config or lib files:
 
-          * #{Enum.map_join(files, "\n  * ", &Path.relative_to_cwd/1)}
+          #* #{Enum.map_join(files, "\n  * ", &Path.relative_to_cwd/1)}
 
-        """
-    end
+        #"""
+    #end
   end
 
   defp mix_compile(compilers) do
